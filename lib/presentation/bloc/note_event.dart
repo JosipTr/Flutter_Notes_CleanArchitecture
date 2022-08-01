@@ -2,11 +2,7 @@ part of 'note_bloc.dart';
 
 abstract class NoteEvent {}
 
-class LoadNotes extends NoteEvent {
-  final List<Note> notes;
-
-  LoadNotes(this.notes);
-}
+class LoadNotes extends NoteEvent {}
 
 class AddNote extends NoteEvent {
   final Note note;
@@ -24,4 +20,10 @@ class GetNote extends NoteEvent {
   final int id;
 
   GetNote(this.id);
+}
+
+class UpdateNote extends NoteEvent {
+  Note note;
+
+  UpdateNote(this.note);
 }

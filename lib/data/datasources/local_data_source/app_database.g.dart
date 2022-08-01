@@ -10,14 +10,12 @@ part of 'app_database.dart';
 class $FloorAppDatabase {
   /// Creates a database builder for a persistent database.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  // ignore: library_private_types_in_public_api
   static _$AppDatabaseBuilder databaseBuilder(String name) =>
       _$AppDatabaseBuilder(name);
 
   /// Creates a database builder for an in memory database.
   /// Information stored in an in memory database disappears when the process is killed.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  // ignore: library_private_types_in_public_api
   static _$AppDatabaseBuilder inMemoryDatabaseBuilder() =>
       _$AppDatabaseBuilder(null);
 }
@@ -109,6 +107,15 @@ class _$NoteDao extends NoteDao {
                   'title': item.title,
                   'description': item.description
                 }),
+        _noteUpdateAdapter = UpdateAdapter(
+            database,
+            'Note',
+            ['id'],
+            (Note item) => <String, Object?>{
+                  'id': item.id,
+                  'title': item.title,
+                  'description': item.description
+                }),
         _noteDeletionAdapter = DeletionAdapter(
             database,
             'Note',
@@ -126,6 +133,8 @@ class _$NoteDao extends NoteDao {
   final QueryAdapter _queryAdapter;
 
   final InsertionAdapter<Note> _noteInsertionAdapter;
+
+  final UpdateAdapter<Note> _noteUpdateAdapter;
 
   final DeletionAdapter<Note> _noteDeletionAdapter;
 
@@ -151,6 +160,11 @@ class _$NoteDao extends NoteDao {
   @override
   Future<void> addNote(Note note) async {
     await _noteInsertionAdapter.insert(note, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updateNote(Note note) async {
+    await _noteUpdateAdapter.update(note, OnConflictStrategy.abort);
   }
 
   @override

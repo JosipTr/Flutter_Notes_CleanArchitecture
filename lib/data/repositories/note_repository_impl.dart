@@ -43,5 +43,14 @@ class NoteRepositoryImpl implements NoteRepository {
       return Left(Exception());
     }
   }
+  
+  @override
+  Future<Either<Exception, void>> updateNote(Note note) async {
+    try{
+      return Right(await _appDatabase.noteDao.updateNote(note));
+    } catch (e) {
+      return Left(Exception());
+    }
+  }
 
 }
