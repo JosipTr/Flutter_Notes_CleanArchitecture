@@ -8,7 +8,7 @@ class GetNoteUseCase {
 
   GetNoteUseCase(this.repository);
 
-  Future<Either<Exception, Note>> call(Note note) async {
-    return await repository.getNote(note);
+  Future<Either<Exception, Note>> call(int id) async {
+    return await repository.getNote(id);
   }
 }

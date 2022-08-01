@@ -6,8 +6,8 @@ abstract class NoteDao {
   @Query('SELECT * FROM Note')
   Future<List<Note>> getAllNotes();
 
-  @Query('SELECT FROM Note')
-  Future<Note?> getNote(Note note);
+  @Query('SELECT FROM Note WHERE id = :id')
+  Future<Note?> getNote(int id);
 
   @delete
   Future<void> deleteNote(Note note);
