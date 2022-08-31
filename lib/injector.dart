@@ -3,7 +3,6 @@ import 'package:free_notes/domain/repositories/note_repository.dart';
 import 'package:free_notes/domain/usecases/add_note_usecase.dart';
 import 'package:free_notes/domain/usecases/delete_note_usecase.dart';
 import 'package:free_notes/domain/usecases/get_all_notes_usecase.dart';
-import 'package:free_notes/domain/usecases/get_note_usecase.dart';
 import 'package:free_notes/domain/usecases/update_note_usecase.dart';
 import 'package:free_notes/presentation/bloc/note_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -33,15 +32,11 @@ Future<void> initDependencies() async {
     DeleteNoteUseCase(injector())
   );
 
-  injector.registerSingleton<GetNoteUseCase>(
-    GetNoteUseCase(injector())
-  );
-
   injector.registerSingleton<UpdateNoteUseCase>(
     UpdateNoteUseCase(injector())
   );
 
   injector.registerFactory<NoteBloc>(
-    () => NoteBloc(injector(), injector(), injector(), injector(), injector())
+    () => NoteBloc(injector(), injector(), injector(), injector())
     );
 }

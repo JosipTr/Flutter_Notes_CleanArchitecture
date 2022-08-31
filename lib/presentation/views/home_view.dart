@@ -26,9 +26,8 @@ class HomeView extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: state.notes.length,
                       itemBuilder: (context, count) => ListTile(
-                        leading: CircleAvatar(child: Text(state.notes[count].id.toString())),
-                          title: Text(state.notes[count].title),
-                          subtitle: Text(state.notes[count].description),
+                          title: Text(state.notes[count].title, maxLines: 1,),
+                          subtitle: Text(state.notes[count].description, maxLines: 2,),
                           trailing: IconButton(
                             onPressed: () => context
                                 .read<NoteBloc>()
